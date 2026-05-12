@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Patelwadi Ganesh Mitramandal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #F5F6FA;
+        }
+        
+        .admin-dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .admin-sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #2C3E50 0%, #34495E 100%);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .admin-sidebar-header {
+            padding: 30px 20px;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .admin-sidebar-header h2 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.5rem;
+        }
+        
+        .admin-sidebar-header p {
+            color: #BDC3C7;
+            font-size: 0.9rem;
+        }
+        
+        .admin-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+        
+        .admin-menu li {
+            margin: 5px 0;
+        }
+        
+        .admin-menu a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 25px;
+            color: #BDC3C7;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .admin-menu a:hover,
+        .admin-menu a.active {
+            background: rgba(255,107,53,0.15);
+            color: var(--primary-color);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .admin-menu a i {
+            width: 24px;
+            font-size: 1.2rem;
+        }
+        
+        /* Main Content */
+        .admin-main {
+            flex: 1;
+            margin-left: 280px;
+        }
+        
+        /* Top Bar */
+        .admin-topbar {
+            background: white;
+            padding: 20px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .admin-topbar h1 {
+            color: var(--dark-color);
+            font-size: 1.8rem;
+        }
+        
+        .admin-user-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .admin-notifications {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .admin-notifications i {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        .admin-user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 15px;
+            background: #F8F9FA;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-user-profile:hover {
+            background: var(--light-color);
+        }
+        
+        .admin-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        /* Content Area */
+        .admin-content {
+            padding: 30px;
+        }
+        
+        /* Dashboard Cards */
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .admin-stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .stat-icon.blue { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .stat-icon.green { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+        .stat-icon.orange { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
+        .stat-icon.purple { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; }
+        
+        .stat-details h3 {
+            font-size: 2.2rem;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+        
+        .stat-details p {
+            color: #7F8C8D;
+            font-size: 0.95rem;
+        }
+        
+        .stat-trend {
+            color: var(--success);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        /* Card */
+        .admin-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #F0F0F0;
+        }
+        
+        .card-header h3 {
+            color: var(--dark-color);
+            font-size: 1.4rem;
+        }
+        
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Table */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .admin-table thead {
+            background: #F8F9FA;
+        }
+        
+        .admin-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--dark-color);
+            border-bottom: 2px solid #E0E0E0;
+        }
+        
+        .admin-table td {
+            padding: 15px;
+            border-bottom: 1px solid #F0F0F0;
+            color: #555;
+        }
+        
+        .admin-table tr:hover {
+            background: #F8F9FA;
+        }
+        
+        /* Badges */
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background: #D5F4E6;
+            color: var(--success);
+        }
+        
+        .badge-warning {
+            background: #FFF3E0;
+            color: var(--warning);
+        }
+        
+        .badge-danger {
+            background: #FFEBEE;
+            color: var(--danger);
+        }
+        
+        .badge-info {
+            background: #E3F2FD;
+            color: #2196F3;
+        }
+        
+        /* Action Buttons */
+        .action-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-edit {
+            background: #E3F2FD;
+            color: #2196F3;
+        }
+        
+        .btn-edit:hover {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-delete {
+            background: #FFEBEE;
+            color: var(--danger);
+        }
+        
+        .btn-delete:hover {
+            background: var(--danger);
+            color: white;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .modal-close:hover {
+            color: var(--danger);
+        }
+        
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        /* Charts Placeholder */
+        .chart-container {
+            height: 300px;
+            background: #F8F9FA;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .admin-sidebar {
+                width: 70px;
+            }
+            
+            .admin-main {
+                margin-left: 70px;
+            }
+            
+            .admin-sidebar-header,
+            .admin-menu span {
+                display: none;
+            }
+            
+            .admin-menu a {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-dashboard">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <h2>Admin Panel</h2>
+                <p id="adminName">Administrator</p>
+            </div>
+            
+            <ul class="admin-menu">
+                <li>
+                    <a href="#" class="active" onclick="showAdminSection('dashboard')">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showAdminSection('users')">
+                        <i class="fas fa-users"></i>
+                        <span>Manage Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showAdminSection('volunteers')">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Volunteers</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showAdminSection('committee')">
+                        <i class="fas fa-user-tie"></i>
+                        <span>Committee</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showAdminSection('donations')">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span>Donations</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showAdminSection('gallery')">
+                        <i class="fas fa-images"></i>
+                        <span>Gallery</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showAdminSection('events')">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showAdminSection('reports')">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showAdminSection('settings')">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="adminLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Top Bar -->
+            <div class="admin-topbar">
+                <h1 id="pageTitle">Dashboard Overview</h1>
+                <div class="admin-user-section">
+                    <div class="admin-notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </div>
+                    <div class="admin-user-profile">
+                        <div class="admin-avatar">A</div>
+                        <div>
+                            <strong>Admin User</strong>
+                            <p style="font-size: 0.8rem; color: #777; margin: 0;">Administrator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Area -->
+            <div class="admin-content">
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="content-section active">
+                    <!-- Stats Cards -->
+                    <div class="admin-stats">
+                        <div class="admin-stat-card">
+                            <div class="stat-icon blue">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3>150</h3>
+                                <p>Total Volunteers</p>
+                                <span class="stat-trend">↑ 12% this month</span>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-stat-card">
+                            <div class="stat-icon green">
+                                <i class="fas fa-rupee-sign"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3>₹5,50,000</h3>
+                                <p>Total Donations</p>
+                                <span class="stat-trend">↑ 28% this month</span>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-stat-card">
+                            <div class="stat-icon orange">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3>12</h3>
+                                <p>Upcoming Events</p>
+                                <span class="stat-trend">Next: 5 days</span>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-stat-card">
+                            <div class="stat-icon purple">
+                                <i class="fas fa-images"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3>245</h3>
+                                <p>Gallery Photos</p>
+                                <span class="stat-trend">↑ 45 new</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activities -->
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>Recent Donations</h3>
+                            <button class="btn btn-primary btn-small">View All</button>
+                        </div>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Donor Name</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Method</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ramesh Patel</td>
+                                    <td>₹10,000</td>
+                                    <td>15 Sept 2024</td>
+                                    <td>UPI</td>
+                                    <td><span class="badge badge-success">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Suresh Mehta</td>
+                                    <td>₹5,000</td>
+                                    <td>14 Sept 2024</td>
+                                    <td>Cash</td>
+                                    <td><span class="badge badge-success">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Priya Sharma</td>
+                                    <td>₹3,000</td>
+                                    <td>14 Sept 2024</td>
+                                    <td>Card</td>
+                                    <td><span class="badge badge-warning">Pending</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Analytics -->
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>Donation Analytics</h3>
+                        </div>
+                        <div class="chart-container">
+                            <i class="fas fa-chart-bar" style="font-size: 3rem;"></i>
+                            <p style="margin-left: 20px;">Chart visualization here</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Users Management Section -->
+                <div id="users" class="content-section">
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>User Management</h3>
+                            <button class="btn btn-primary btn-small" onclick="openModal('addUser')">
+                                <i class="fas fa-plus"></i> Add User
+                            </button>
+                        </div>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                                <tr>
+                                    <td>Rajesh Kumar</td>
+                                    <td>rajesh@email.com</td>
+                                    <td><span class="badge badge-info">Volunteer</span></td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Amit Patel</td>
+                                    <td>amit@email.com</td>
+                                    <td><span class="badge badge-warning">Committee</span></td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <button class="btn-icon btn-edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-icon btn-delete"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Volunteers Section -->
+                <div id="volunteers" class="content-section">
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>Volunteer Management</h3>
+                            <button class="btn btn-primary btn-small">
+                                <i class="fas fa-download"></i> Export CSV
+                            </button>
+                        </div>
+                        <p>Total Volunteers: <strong>150</strong></p>
+                        <p>Active: <strong>145</strong> | Inactive: <strong>5</strong></p>
+                    </div>
+                </div>
+                
+                <!-- Donations Section -->
+                <div id="donations" class="content-section">
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>Donation Tracking</h3>
+                            <button class="btn btn-primary btn-small">
+                                <i class="fas fa-file-pdf"></i> Generate Report
+                            </button>
+                        </div>
+                        <div class="admin-stats" style="margin-top: 20px;">
+                            <div class="admin-stat-card">
+                                <div class="stat-icon green">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div class="stat-details">
+                                    <h3>₹5,50,000</h3>
+                                    <p>Total Received</p>
+                                </div>
+                            </div>
+                            <div class="admin-stat-card">
+                                <div class="stat-icon orange">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-details">
+                                    <h3>₹25,000</h3>
+                                    <p>Pending</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settings Section -->
+                <div id="settings" class="content-section">
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>System Settings</h3>
+                        </div>
+                        <div class="form-group">
+                            <label>Website Title</label>
+                            <input type="text" value="Patelwadi Sarvajanik Ganesh Mitramandal">
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Email</label>
+                            <input type="email" value="info@patelwadiganesh.org">
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Phone</label>
+                            <input type="tel" value="+91 98765 43210">
+                        </div>
+                        <button class="btn btn-primary">Save Settings</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New User</h3>
+                <span class="modal-close" onclick="closeModal('addUser')">&times;</span>
+            </div>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select required>
+                        <option value="">Select Role</option>
+                        <option value="volunteer">Volunteer</option>
+                        <option value="committee">Committee</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Add User</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

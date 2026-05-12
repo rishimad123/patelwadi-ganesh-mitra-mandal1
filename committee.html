@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core Committee - Patelwadi Ganesh Mitramandal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .committee-section {
+            padding: 80px 0;
+        }
+        
+        .committee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .committee-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .committee-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .committee-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 4rem;
+        }
+        
+        .committee-info {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .committee-info h3 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+        
+        .committee-position {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .committee-info p {
+            color: #777;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .committee-contact {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .committee-contact a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-color);
+            transition: all 0.3s ease;
+        }
+        
+        .committee-contact a:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <!-- Include navigation from index.html -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-om"></i>
+                    <span>Patelwadi Ganesh Mitramandal</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="committee.html" class="active">Committee</a></li>
+                    <li><a href="volunteers.html">Volunteers</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="donations.html">Donations</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html" class="btn-login">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="hero" style="height: 40vh;">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" style="font-size: 3rem;">Core Committee</h1>
+            <p class="hero-subtitle">Meet our dedicated leadership team</p>
+        </div>
+    </section>
+    
+    <!-- Committee Members -->
+    <section class="committee-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Leadership Team</h2>
+                <div class="divider"></div>
+                <p style="margin-top: 15px; color: #777; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Our committee members work tirelessly to ensure every aspect of the celebration is perfect
+                </p>
+            </div>
+            
+            <div class="committee-grid">
+                <!-- President -->
+                <div class="committee-card">
+                    <div class="committee-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="committee-info">
+                        <h3>Ramesh Patel</h3>
+                        <div class="committee-position">President</div>
+                        <p>Leading the mandal with 20+ years of experience in community service and event management.</p>
+                        <div class="committee-contact">
+                            <a href="tel:+919876543210"><i class="fas fa-phone"></i></a>
+                            <a href="mailto:ramesh@patelwadiganesh.org"><i class="fas fa-envelope"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vice President -->
+                <div class="committee-card">
+                    <div class="committee-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="committee-info">
+                        <h3>Suresh Mehta</h3>
+                        <div class="committee-position">Vice President</div>
+                        <p>Supporting all operations with expertise in logistics and volunteer coordination.</p>
+                        <div class="committee-contact">
+                            <a href="tel:+919876543211"><i class="fas fa-phone"></i></a>
+                            <a href="mailto:suresh@patelwadiganesh.org"><i class="fas fa-envelope"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Secretary -->
+                <div class="committee-card">
+                    <div class="committee-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="committee-info">
+                        <h3>Amit Desai</h3>
+                        <div class="committee-position">Secretary</div>
+                        <p>Managing all communications, documentation, and administrative tasks efficiently.</p>
+                        <div class="committee-contact">
+                            <a href="tel:+919876543212"><i class="fas fa-phone"></i></a>
+                            <a href="mailto:amit@patelwadiganesh.org"><i class="fas fa-envelope"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Treasurer -->
+                <div class="committee-card">
+                    <div class="committee-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="committee-info">
+                        <h3>Prakash Shah</h3>
+                        <div class="committee-position">Treasurer</div>
+                        <p>Handling all financial matters with complete transparency and accountability.</p>
+                        <div class="committee-contact">
+                            <a href="tel:+919876543213"><i class="fas fa-phone"></i></a>
+                            <a href="mailto:prakash@patelwadiganesh.org"><i class="fas fa-envelope"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cultural Head -->
+                <div class="committee-card">
+                    <div class="committee-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="committee-info">
+                        <h3>Neha Joshi</h3>
+                        <div class="committee-position">Cultural Head</div>
+                        <p>Organizing cultural programs and ensuring traditional values are maintained.</p>
+                        <div class="committee-contact">
+                            <a href="tel:+919876543214"><i class="fas fa-phone"></i></a>
+                            <a href="mailto:neha@patelwadiganesh.org"><i class="fas fa-envelope"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Decoration Head -->
+                <div class="committee-card">
+                    <div class="committee-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="committee-info">
+                        <h3>Vikram Singh</h3>
+                        <div class="committee-position">Decoration Head</div>
+                        <p>Creating stunning decorations and maintaining the aesthetic appeal of the pandal.</p>
+                        <div class="committee-contact">
+                            <a href="tel:+919876543215"><i class="fas fa-phone"></i></a>
+                            <a href="mailto:vikram@patelwadiganesh.org"><i class="fas fa-envelope"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Include footer from index.html -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>Patelwadi Sarvajanik Ganesh Mitramandal is dedicated to celebrating Ganesh Chaturthi with devotion and community service.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="committee.html">Committee</a></li>
+                        <li><a href="volunteers.html">Volunteers</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Patelwadi, Mumbai - 400001</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> info@patelwadiganesh.org</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates about our events</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Patelwadi Sarvajanik Ganesh Mitramandal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="main.js"></script>
+</body>
+</html>

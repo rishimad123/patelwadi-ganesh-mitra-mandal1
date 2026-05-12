@@ -1,0 +1,50 @@
+[
+  {
+    "receiptId": "RCP-1778564010683",
+    "name": "Rajesh Kumar",
+    "amount": 1500,
+    "userId": 2,
+    "submittedAt": "2026-05-12T05:33:30.677Z",
+    "status": "pending_review"
+  },
+  {
+    "receiptId": "RCP-1778564044668",
+    "name": "Rajesh Kumar",
+    "amount": 1500,
+    "userId": 2,
+    "submittedAt": "2026-05-12T05:34:04.660Z",
+    "status": "pending_review"
+  },
+  {
+    "receiptId": "RCP-1778564159186",
+    "name": "hello",
+    "amount": 101,
+    "userId": 2,
+    "submittedAt": "2026-05-12T05:35:59.178Z",
+    "status": "pending_review"
+  },
+  {
+    "receiptId": "RCP-1778569578348",
+    "name": "het",
+    "amount": 8855,
+    "userId": 2,
+    "submittedAt": "2026-05-12T07:06:18.343Z",
+    "status": "pending_review"
+  },
+  {
+    "receiptId": "RCP-1778569730519",
+    "name": "hh",
+    "amount": 99,
+    "userId": 2,
+    "submittedAt": "2026-05-12T07:08:50.513Z",
+    "status": "pending_review"
+  },
+  {
+    "receiptId": "RCP-1778570644129",
+    "name": "5",
+    "amount": 5,
+    "userId": 2,
+    "submittedAt": "2026-05-12T07:24:04.122Z",
+    "status": "pending_review"
+  }
+]
